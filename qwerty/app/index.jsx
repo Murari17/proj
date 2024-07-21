@@ -4,23 +4,18 @@ import { View, Text, Image, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import 'nativewind';
 
-// import { images } from "../constants";
-// import { CustomButton, Loader } from "../components";
-// import { useGlobalContext } from "../context/GlobalProvider";
+import { images } from "../constants";
+import { CustomButton, Loader } from "../components";
+import { useGlobalContext } from "../context/GlobalProvider";
 
-const Welcome = () => {
-  // Mock values for loading and isLogged
-  const loading = false; // Change to true if you want to simulate loading
-  const isLogged = false; // Change to true if you want to simulate a logged-in user
-
-  // const { loading, isLogged } = useGlobalContext();
+const Index = () => {
+  const { loading, isLogged } = useGlobalContext();
 
   if (!loading && isLogged) return <Redirect href="/home" />;
 
   return (
     <SafeAreaView className="bg-primary h-full">
-      {/* Uncomment the following line if Loader is available */}
-      {/* <Loader isLoading={loading} /> */}
+      <Loader isLoading={loading} />
 
       <ScrollView
         contentContainerStyle={{
@@ -28,18 +23,17 @@ const Welcome = () => {
         }}
       >
         <View className="w-full flex justify-center items-center h-full px-4">
-          {/* Uncomment the following lines if images are available */}
-          {/* <Image
+          <Image
             source={images.logo}
             className="w-[130px] h-[84px]"
             resizeMode="contain"
-          /> */}
+          />
 
-          {/* <Image
+          <Image
             source={images.cards}
             className="max-w-[380px] w-full h-[298px]"
             resizeMode="contain"
-          /> */}
+          />
 
           <View className="relative mt-5">
             <Text className="text-3xl text-white font-pblack text-center">
@@ -48,12 +42,11 @@ const Welcome = () => {
               <Text className="text-secondary-200">Aora</Text>
             </Text>
 
-            {/* Uncomment the following line if images are available */}
-            {/* <Image
+            <Image
               source={images.path}
               className="w-[136px] h-[15px] absolute -bottom-2 -right-8"
               resizeMode="contain"
-            /> */}
+            />
           </View>
 
           <Text className="text-sm font-pregular text-gray-100 mt-7 text-center">
@@ -61,12 +54,11 @@ const Welcome = () => {
             Exploration with Aora
           </Text>
 
-          {/* Uncomment the following line if CustomButton is available */}
-          {/* <CustomButton
+          <CustomButton
             title="Continue with Email"
             handlePress={() => router.push("/sign-in")}
             containerStyles="w-full mt-7"
-          /> */}
+          />
         </View>
       </ScrollView>
 
@@ -75,4 +67,4 @@ const Welcome = () => {
   );
 };
 
-export default Welcome;
+export default Index;

@@ -1,11 +1,9 @@
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
-// import "react-native-url-polyfill/auto";
 import { SplashScreen, Stack } from "expo-router";
+import GlobalProvider from "../context/GlobalProvider";
 
-// import GlobalProvider from "../context/GlobalProvider";
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
+// Prevent SplashScreen from hiding automatically
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
@@ -22,7 +20,10 @@ const RootLayout = () => {
   });
 
   useEffect(() => {
-    if (error) throw error;
+    if (error) {
+      console.error("Font loading error:", error);
+      return;
+    }
 
     if (fontsLoaded) {
       SplashScreen.hideAsync();
@@ -30,20 +31,18 @@ const RootLayout = () => {
   }, [fontsLoaded, error]);
 
   if (!fontsLoaded) {
-    return null;
-  }
-
-  if (!fontsLoaded && !error) {
-    return null;
+    return null; // Optionally render a loading screen or spinner here
   }
 
   return (
+    <GlobalProvider>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
       </Stack>
+    </GlobalProvider>
   );
 };
 
